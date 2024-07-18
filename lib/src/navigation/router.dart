@@ -5,9 +5,6 @@ import '../features/features.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-const homePath = '/home';
-const registerPath = '/register';
-
 enum RouterPath {
   welcome("/welcome"),
   home("/home"),
