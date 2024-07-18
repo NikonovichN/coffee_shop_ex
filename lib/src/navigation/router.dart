@@ -1,5 +1,3 @@
-import 'package:coffee_shop_ex/src/features/favorites/presentation/ui/favorites_screen.dart';
-import 'package:coffee_shop_ex/src/features/home/presentation/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,7 +41,7 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-              path: '/home',
+              path: RouterPath.home.path,
               builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
             ),
           ],
@@ -51,8 +49,24 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: <RouteBase>[
             GoRoute(
-              path: '/favorites',
+              path: RouterPath.favorite.path,
               builder: (BuildContext context, GoRouterState state) => const FavoritesScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              path: RouterPath.cart.path,
+              builder: (BuildContext context, GoRouterState state) => const CartScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: <RouteBase>[
+            GoRoute(
+              path: RouterPath.reminders.path,
+              builder: (BuildContext context, GoRouterState state) => const RemindersScreen(),
             ),
           ],
         ),
@@ -76,10 +90,26 @@ class ScaffoldWithNavBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'A'),
-          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'B'),
-          // BottomNavigationBarItem(icon: Icon(Icons.tab), label: 'C'),
-          // BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_sharp), label: 'D'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'A',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.work),
+            label: 'B',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.tab),
+            label: 'C',
+            backgroundColor: Colors.cyan,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.access_time_filled_rounded),
+            label: 'D',
+            backgroundColor: Colors.cyan,
+          ),
         ],
         currentIndex: navigationShell.currentIndex,
         onTap: (int index) => _onTap(context, index),
