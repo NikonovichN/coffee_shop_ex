@@ -1,3 +1,4 @@
+import 'package:coffee_shop_ex/src/features/favorites/presentation/ui/favorites_screen.dart';
 import 'package:coffee_shop_ex/src/features/home/presentation/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -51,7 +52,7 @@ final router = GoRouter(
           routes: <RouteBase>[
             GoRoute(
               path: '/favorites',
-              builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
+              builder: (BuildContext context, GoRouterState state) => const FavoritesScreen(),
             ),
           ],
         ),
@@ -75,8 +76,8 @@ class ScaffoldWithNavBar extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.work)),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'A'),
+          BottomNavigationBarItem(icon: Icon(Icons.work), label: 'B'),
           // BottomNavigationBarItem(icon: Icon(Icons.tab), label: 'C'),
           // BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_sharp), label: 'D'),
         ],
