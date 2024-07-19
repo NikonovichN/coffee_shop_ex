@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'src/navigation/router.dart';
+import 'package:coffee_shop_ex/src/ui_kit/atom/fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Coffee Shop',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'Sora',
+        fontFamily: CoffeeAppFonts.defaultFontFamily,
       ),
       routerConfig: router,
     );

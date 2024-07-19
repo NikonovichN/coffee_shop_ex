@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:coffee_shop_ex/src/ui_kit/ui_kit.dart';
 import 'package:coffee_shop_ex/src/navigation/router.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -15,9 +16,13 @@ class WelcomeScreen extends StatelessWidget {
         children: [
           const Center(child: Text('Welcome Screen')),
           const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () => context.go(RouterPath.home.path),
-            child: const Text('Get Started'),
+          SizedBox(
+            width: double.infinity,
+            child: CoffeeAppButton.primary(
+              margin: const EdgeInsets.symmetric(horizontal: 24.0),
+              onPressed: () => context.go(RouterPath.home.path),
+              child: const Text('Get Started'),
+            ),
           ),
         ],
       ),
