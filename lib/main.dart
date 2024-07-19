@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Coffee Shop',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Sora',
       ),
       routerConfig: router,
     );
