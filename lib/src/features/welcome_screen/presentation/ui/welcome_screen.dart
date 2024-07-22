@@ -1,6 +1,8 @@
-import 'package:coffee_shop_ex/src/ui_kit/atom/colors.dart';
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
+
+import 'package:coffee_shop_ex/src/ui_kit/res/assets.gen.dart';
 
 import 'package:coffee_shop_ex/src/ui_kit/ui_kit.dart';
 import 'package:coffee_shop_ex/src/navigation/router.dart';
@@ -15,9 +17,9 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/images/coffee_cup.png"),
+          image: AssetImage(Assets.images.coffeeCup.path),
           fit: BoxFit.contain,
           alignment: Alignment.topCenter,
         ),

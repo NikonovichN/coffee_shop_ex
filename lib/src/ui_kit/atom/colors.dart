@@ -26,4 +26,8 @@ class CoffeeAppColors {
 
   static const Color textPrimary = Colors.white;
   static const Color textSecondary = BasicColors.greyLighter;
+
+  static const Color surfaceWhite = Colors.white;
+
+  static const Color activeIconButton = BasicColors.color01;
 }

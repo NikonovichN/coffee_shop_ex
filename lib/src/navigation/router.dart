@@ -1,5 +1,10 @@
+import 'package:coffee_shop_ex/src/ui_kit/res/assets.gen.dart';
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
+
+import 'package:coffee_shop_ex/src/navigation/bottom_bar_item_app.dart';
+import 'package:coffee_shop_ex/src/ui_kit/atom/colors.dart';
 
 import '../features/features.dart';
 
@@ -85,39 +90,71 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'A',
-            backgroundColor: Colors.cyan,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.work),
-            label: 'B',
-            backgroundColor: Colors.cyan,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.tab),
-            label: 'C',
-            backgroundColor: Colors.cyan,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time_filled_rounded),
-            label: 'D',
-            backgroundColor: Colors.cyan,
-          ),
-        ],
+      bottomNavigationBar: BottomNavigationBarApp(
         currentIndex: navigationShell.currentIndex,
-        onTap: (int index) => _onTap(context, index),
+        onTap: _onTap,
+        items: [
+          BottomBarItemApp(iconPath: Assets.svg.home.path),
+          BottomBarItemApp(iconPath: Assets.svg.heart.path),
+          BottomBarItemApp(iconPath: Assets.svg.bag.path),
+          BottomBarItemApp(iconPath: Assets.svg.notification.path),
+        ],
       ),
     );
   }
 
-  void _onTap(BuildContext context, int index) {
+  void _onTap(int index) {
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
+    );
+  }
+}
+
+class BottomNavigationBarApp extends StatelessWidget {
+  static const _animationDuration = Duration(milliseconds: 150);
+
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+  final List<BottomBarItemApp> items;
+
+  const BottomNavigationBarApp({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+    required this.items,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 99,
+      decoration: const BoxDecoration(color: CoffeeAppColors.surfaceWhite),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: items.asMap().entries.map(
+          (entry) {
+            final idx = entry.key;
+            final widget = entry.value;
+            final isActive = idx == currentIndex;
+
+            return Expanded(
+              child: GestureDetector(
+                onTap: () => onTap(idx),
+                child: AnimatedTheme(
+                  duration: _animationDuration,
+                  data: ThemeData(
+                    iconTheme: IconThemeData(
+                      color: isActive ? CoffeeAppColors.activeIconButton : Colors.transparent,
+                    ),
+                  ),
+                  child: widget,
+                ),
+              ),
+            );
+          },
+        ).toList(),
+      ),
     );
   }
 }
