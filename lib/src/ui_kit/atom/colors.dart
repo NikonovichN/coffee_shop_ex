@@ -11,6 +11,8 @@ class BasicColors {
 
   static const Color color01Light = Color.fromRGBO(236, 165, 120, 1);
   static const Color color01Disabled = Color.fromRGBO(179, 164, 155, 1);
+
+  static const Color greyLighter = Color.fromRGBO(162, 162, 162, 1);
 }
 
 class CoffeeAppColors {
@@ -21,4 +23,7 @@ class CoffeeAppColors {
   static const Color buttonBackgroundDisabled = BasicColors.color01Disabled;
   static const Color buttonLabelPrimary = Colors.white;
   static const Color buttonLabelDisabled = BasicColors.color05;
+
+  static const Color textPrimary = Colors.white;
+  static const Color textSecondary = BasicColors.greyLighter;
 }
