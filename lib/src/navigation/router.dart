@@ -1,9 +1,9 @@
-import 'package:coffee_shop_ex/src/ui_kit/res/assets.gen.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:coffee_shop_ex/src/ui_kit/res/assets.gen.dart';
 
-import 'package:coffee_shop_ex/src/navigation/bottom_bar_item_app.dart';
 import 'package:coffee_shop_ex/src/ui_kit/atom/colors.dart';
 
 import '../features/features.dart';
@@ -113,6 +113,13 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
 class BottomNavigationBarApp extends StatelessWidget {
   static const _animationDuration = Duration(milliseconds: 150);
+  static const _emptySpace = SizedBox(height: 6);
+  static const _lineRadius = BoxDecoration(
+    color: CoffeeAppColors.activeIconButton,
+    borderRadius: BorderRadius.all(
+      Radius.circular(18.0),
+    ),
+  );
 
   final int currentIndex;
   final ValueChanged<int> onTap;
@@ -128,7 +135,7 @@ class BottomNavigationBarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 99,
+      height: 64,
       decoration: const BoxDecoration(color: CoffeeAppColors.surfaceWhite),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -141,20 +148,58 @@ class BottomNavigationBarApp extends StatelessWidget {
             return Expanded(
               child: GestureDetector(
                 onTap: () => onTap(idx),
-                child: AnimatedTheme(
-                  duration: _animationDuration,
-                  data: ThemeData(
-                    iconTheme: IconThemeData(
-                      color: isActive ? CoffeeAppColors.activeIconButton : Colors.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AnimatedTheme(
+                      duration: _animationDuration,
+                      data: ThemeData(
+                        iconTheme: IconThemeData(
+                          color: isActive
+                              ? CoffeeAppColors.activeIconButton
+                              : CoffeeAppColors.inActiveIconButton,
+                        ),
+                      ),
+                      child: widget,
                     ),
-                  ),
-                  child: widget,
+                    _emptySpace,
+                    AnimatedSize(
+                      duration: _animationDuration,
+                      child: Container(
+                        height: 5,
+                        width: isActive ? 10 : 0,
+                        decoration: _lineRadius,
+                      ),
+                    )
+                  ],
                 ),
               ),
             );
           },
         ).toList(),
       ),
+    );
+  }
+}
+
+class BottomBarItemApp extends StatelessWidget {
+  final String iconPath;
+
+  const BottomBarItemApp({super.key, required this.iconPath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          iconPath,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).iconTheme.color!,
+            BlendMode.srcIn,
+          ),
+        ),
+      ],
     );
   }
 }
